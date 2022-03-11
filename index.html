@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        crossorigin="anonymous">
+
+<body>
+    <div id="overlay">
+        <span data-message class="message"></span>
+        <button data-restart class="restart-button">New Game</button>
+    </div>
+
+
+    <section class="tic-tac-toe">
+        <div class="header">
+            <div class="info-head">
+                <p>TicTacToe</p>
+                <i class="fa-solid fa-square-xmark icon"></i>
+            </div>
+        </div>
+        <div class="info-panel">
+            <div class="info-head">
+                <p>Scores</p>
+            </div>
+            <div class="info-main">
+                <div class="score">
+                    <p class="score-text">You&colon;&nbsp;<span class="score-number" data-you>0</span></p>
+                    <p class="score-text">Enemy&colon;&nbsp;&ensp;<span class="score-number" data-enemy>0</span></p>
+                    <p class="score-text">Draw&colon;&nbsp;<span class="score-number" data-draw>0</span></p>
+                </div>
+                <div class="player-turn">
+                    <p>PLAYING</p>
+                    <span data-player></span>
+                </div>
+
+            </div>
+        </div>
+        <div class="container" data-board>
+            <button class="cell" data-cell="0"></button>
+            <button class="cell" data-cell="1"></button>
+            <button class="cell" data-cell="2"></button>
+            <button class="cell" data-cell="3"></button>
+            <button class="cell" data-cell="4"></button>
+            <button class="cell" data-cell="5"></button>
+            <button class="cell" data-cell="6"></button>
+            <button class="cell" data-cell="7"></button>
+            <button class="cell" data-cell="8"></button>
+        </div>
+    </section>
+
+    <script src="js/index.js"></script>
+</body>
+
+</html>
