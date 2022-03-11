@@ -9,9 +9,9 @@ const board = document.querySelector('[data-board]');
 const cell = document.querySelectorAll('[data-cell]');
 
 let playerTurn = 'X';
-let countX = 1;
-let countY = 1;
-let countDraw = 1;
+let countX = 0;
+let countY = 0;
+let countDraw = 0;
 
 const winningCombination = [
     [0, 1, 2],
@@ -74,11 +74,18 @@ const wonMessage = (won) => {
     if (won) {
         message.innerHTML = 'PLAYER ' + playerTurn + ' WON!'
         overlay.style.display = "block";
-        playerTurn === 'X' ? you.innerHTML = countX++ : enemy.innerHTML = countY++;
+        if (playerTurn === 'X') {
+            countX++;
+           return you.innerHTML = countX;
+        } else {
+            countY++;
+           return enemy.innerHTML = countY;
+        }
     } else {
         message.innerHTML = 'DRAW'
         overlay.style.display = "block";
-        draw.innerHTML = countDraw++;
+        countDraw += 1
+        draw.innerHTML = countDraw;
     }
 }
 
