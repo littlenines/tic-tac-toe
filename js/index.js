@@ -1,18 +1,19 @@
-const board = document.querySelector('[data-board]');
+const overlay = document.querySelector('[data-overlay]');
 const message = document.querySelector('[data-message]');
-const player = document.querySelector('[data-player]');
 const restartButton = document.querySelector('[data-restart]');
-const cell = document.querySelectorAll('[data-cell]');
+const player = document.querySelector('[data-player]');
 const you = document.querySelector('[data-you]');
 const enemy = document.querySelector('[data-enemy]');
 const draw = document.querySelector('[data-draw]');
+const board = document.querySelector('[data-board]');
+const cell = document.querySelectorAll('[data-cell]');
 
 let playerTurn = 'X';
 let countX = 1;
 let countY = 1;
 let countDraw = 1;
 
-const winningComb = [
+const winningCombination = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -24,26 +25,26 @@ const winningComb = [
 
 let gameState = ["", "", "", "", "", "", "", "", ""];
 
-const gameActive = (event) => {
+const cellEvent = (event) => {
     const key = event.target;
     if (!key.closest('.cell')) return;
 
     if (key.textContent === "") {
-
         key.innerHTML = playerTurn
         gameState[key.dataset.cell] = playerTurn;
         turnOrder(playerTurn);
         player.innerHTML = playerTurn;
+        playerTurn === 'X' ? key.classList.add('turn-x') : key.classList.add('turn-y');
     }
 
 }
 
-board.addEventListener('click', gameActive);
+board.addEventListener('click', cellEvent);
 
 player.innerHTML = playerTurn;
 
 const turnOrder = (turn) => {
-    checkWinner(winningComb);
+    checkWinner(winningCombination);
     return playerTurn = turn === 'X' ? "O" : "X";
 }
 
@@ -59,11 +60,11 @@ function checkWinner(combo) {
             continue;
         } else if (a === b && b === c) {
             hasWon = true;
-            wonMessage(playerTurn, hasWon);
+            wonMessage(hasWon);
             break;
         }
     }
-
+    // Draw
     if (!gameState.includes("")) {
         wonMessage(hasWon);
     }
@@ -72,24 +73,19 @@ function checkWinner(combo) {
 const wonMessage = (won) => {
     if (won) {
         message.innerHTML = 'PLAYER ' + playerTurn + ' WON!'
-        document.getElementById("overlay").style.display = "block";
-        if (playerTurn === 'X') {
-            you.innerHTML = countX++;
-        } else {
-            enemy.innerHTML = countY++;
-        }
+        overlay.style.display = "block";
+        playerTurn === 'X' ? you.innerHTML = countX++ : enemy.innerHTML = countY++;
     } else {
         message.innerHTML = 'DRAW'
-        document.getElementById("overlay").style.display = "block";
+        overlay.style.display = "block";
         draw.innerHTML = countDraw++;
     }
 }
 
-
 const restartGame = () => {
     gameState = ["", "", "", "", "", "", "", "", ""];
-    cell.forEach(data => data.innerHTML = "");
-    document.getElementById("overlay").style.display = "none";
+    cell.forEach(data => { data.innerHTML = ""; data.classList.remove('turn-x'); data.classList.remove('turn-y'); });
+    overlay.style.display = "none";
 }
 
 restartButton.addEventListener("click", restartGame);
