@@ -1,3 +1,4 @@
+(() => {
 const overlay = document.querySelector('[data-overlay]');
 const message = document.querySelector('[data-message]');
 const restartButton = document.querySelector('[data-restart]');
@@ -96,3 +97,4 @@ const restartGame = () => {
 }
 
 restartButton.addEventListener("click", restartGame);
+})();
